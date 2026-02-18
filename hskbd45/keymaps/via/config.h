@@ -2,7 +2,7 @@
 
 #define VENDOR_ID       0x22CE
 #define PRODUCT_ID      0x0276
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    hakumaru12
-#define PRODUCT         HSKBD45
-#define DESCRIPTION     HSKBD45 keyboard
+
+/* Device metadata (DEVICE_VER / MANUFACTURER / PRODUCT / DESCRIPTION)
+   are provided by the keyboard info and must not be redefined here
+   to avoid conflicts with QMK's generated headers. */
