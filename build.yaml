@@ -1,6 +1,6 @@
 ---
 include:
-  - board: nice_nano//zmk   # nice_nano → nice_nano//zmk に変更
+  - board: nice_nano
     shield: hskbd45_left
-  - board: nice_nano//zmk
+  - board: nice_nano
     shield: hskbd45_right
