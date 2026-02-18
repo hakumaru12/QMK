@@ -18,7 +18,13 @@ jobs:
       - name: Install required packages
         run: |
           sudo apt-get update && sudo apt-get install -y --no-install-recommends \
-            build-essential git wget unzip dfu-util avrdude gcc-avr avr-libc make
+            build-essential git wget unzip dfu-util avrdude gcc-avr avr-libc make python3-pip
+
+      - name: Install QMK CLI
+        run: |
+          python3 -m pip install --user qmk
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          $HOME/.local/bin/qmk --version
 
       - name: Clone qmk_firmware
         run: git clone --depth 1 https://github.com/qmk/qmk_firmware.git qmk_firmware
@@ -31,7 +37,8 @@ jobs:
       - name: Build Pro Micro (HSKBD45)
         working-directory: qmk_firmware
         run: |
-          make hskbd45:via -j$(nproc)
+          # use QMK CLI (installed earlier) for a reliable build
+          qmk compile -kb hskbd45 -km via
 
       - name: Upload firmware hex
         uses: actions/upload-artifact@v4
