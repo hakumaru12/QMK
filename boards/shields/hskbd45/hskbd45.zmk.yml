@@ -3,6 +3,8 @@ id: hskbd45
 name: HSKBD45
 type: shield
 url: ""
+requires:
+  - pro_micro
 features:
   - keys
   - encoder
