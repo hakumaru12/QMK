@@ -1,3 +1,4 @@
+# boards/shields/hskbd45/Kconfig.shield
 config SHIELD_HSKBD45_LEFT
     def_bool $(shields_list_contains,hskbd45_left)
 
