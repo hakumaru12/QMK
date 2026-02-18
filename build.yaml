@@ -1,6 +1,6 @@
 ---
 include:
-  - board: nice_nano/v2
+  - board: nice_nano
     shield: hskbd45_left
-  - board: nice_nano/v2
+  - board: nice_nano
     shield: hskbd45_right
