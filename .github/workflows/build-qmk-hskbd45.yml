@@ -43,8 +43,17 @@ jobs:
           # use QMK CLI (installed earlier) for a reliable build
           qmk compile -kb hskbd45 -km via
 
+      - name: List qmk_firmware/.build contents
+        working-directory: qmk_firmware
+        run: |
+          echo "=== .build tree ==="
+          ls -la .build || true
+          echo
+          echo "=== find hex/bin ==="
+          find .build -type f -name "hskbd45*" -print || true
+
       - name: Upload firmware hex
         uses: actions/upload-artifact@v4
         with:
           name: hskbd45-pro_micro-hex
-          path: qmk_firmware/.build/**/hskbd45*.hex
+          path: qmk_firmware/.build/**/hskbd45*.*
