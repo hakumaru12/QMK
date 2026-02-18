@@ -1,0 +1,40 @@
+name: Build QMK — HSKBD45 (Pro Micro)
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - 'hskbd45/**'
+      - '.github/workflows/build-qmk-hskbd45.yml'
+
+jobs:
+  build-hex:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install required packages
+        run: |
+          sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+            build-essential git wget unzip dfu-util avrdude gcc-avr avr-libc make
+
+      - name: Clone qmk_firmware
+        run: git clone --depth 1 https://github.com/qmk/qmk_firmware.git qmk_firmware
+
+      - name: Copy HSKBD45 keyboard into qmk_firmware
+        run: |
+          mkdir -p qmk_firmware/keyboards/hskbd45
+          cp -r hskbd45/* qmk_firmware/keyboards/hskbd45/
+
+      - name: Build Pro Micro (HSKBD45)
+        working-directory: qmk_firmware
+        run: |
+          make hskbd45:via -j$(nproc)
+
+      - name: Upload firmware hex
+        uses: actions/upload-artifact@v4
+        with:
+          name: hskbd45-pro_micro-hex
+          path: qmk_firmware/.build/**/hskbd45*.hex
