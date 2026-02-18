@@ -29,6 +29,9 @@ jobs:
       - name: Clone qmk_firmware
         run: git clone --depth 1 https://github.com/qmk/qmk_firmware.git qmk_firmware
 
+      - name: Init qmk_firmware submodules
+        run: git -C qmk_firmware submodule update --init --recursive
+
       - name: Copy HSKBD45 keyboard into qmk_firmware
         run: |
           mkdir -p qmk_firmware/keyboards/hskbd45
