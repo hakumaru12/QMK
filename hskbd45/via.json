@@ -1,0 +1,7 @@
+{
+  "name": "hskbd45",
+  "vendorId": "0x22CE",
+  "productId": "0x0276",
+  "lighting": { "numberOfKeys": 45 },
+  "layouts": { "LAYOUT": {} }
+}
