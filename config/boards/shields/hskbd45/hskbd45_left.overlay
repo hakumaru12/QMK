@@ -1,17 +1,7 @@
 #include "hskbd45.dtsi"
 
-/* 左半分はマスター（USB接続側） */
-
 &default_transform {
     col-offset = <0>;
-};
-
-/* シリアル通信（TRRS D0ピン） */
-&uart0 {
-    status = "okay";
-    current-speed = <1000000>;
-    tx-pin = <3>;   /* D0 on Pro Micro = pin 3 in ZMK numbering */
-    rx-pin = <2>;
 };
 
 &encoder_left {
