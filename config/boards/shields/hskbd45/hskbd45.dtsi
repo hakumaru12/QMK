@@ -23,28 +23,38 @@
         diode-direction = "col2row";
         wakeup-source;
 
+        /*
+         * QMK pin → nice!nano nRF pin
+         * F4 → P0.31, F5 → P0.29, F6 → P0.02, F7 → P1.15
+         * B1 → P1.13, B3 → P1.11, B2 → P0.10
+         */
         col-gpios
-            = <&pro_micro 19 GPIO_ACTIVE_HIGH>  /* F4 */
-            , <&pro_micro 18 GPIO_ACTIVE_HIGH>  /* F5 */
-            , <&pro_micro 17 GPIO_ACTIVE_HIGH>  /* F6 */
-            , <&pro_micro 16 GPIO_ACTIVE_HIGH>  /* F7 */
-            , <&pro_micro 9  GPIO_ACTIVE_HIGH>  /* B1 */
-            , <&pro_micro 11 GPIO_ACTIVE_HIGH>  /* B3 */
-            , <&pro_micro 10 GPIO_ACTIVE_HIGH>  /* B2 */
+            = <&gpio0 31 GPIO_ACTIVE_HIGH>  /* F4 */
+            , <&gpio0 29 GPIO_ACTIVE_HIGH>  /* F5 */
+            , <&gpio0  2 GPIO_ACTIVE_HIGH>  /* F6 */
+            , <&gpio1 15 GPIO_ACTIVE_HIGH>  /* F7 */
+            , <&gpio1 13 GPIO_ACTIVE_HIGH>  /* B1 */
+            , <&gpio1 11 GPIO_ACTIVE_HIGH>  /* B3 */
+            , <&gpio0 10 GPIO_ACTIVE_HIGH>  /* B2 */
             ;
 
+        /*
+         * D4 → P0.17, C6 → P0.20, D7 → P0.13, E6 → P0.24
+         * (nice!nano v2 対応値)
+         */
         row-gpios
-            = <&pro_micro 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* D4 */
-            , <&pro_micro 5  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* C6 */
-            , <&pro_micro 6  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* D7 */
-            , <&pro_micro 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* E6 */
+            = <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* D4 */
+            , <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* C6 */
+            , <&gpio0 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* D7 */
+            , <&gpio0 24 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  /* E6 */
             ;
     };
 
     encoder_left: encoder_left {
         compatible = "alps,ec11";
-        a-gpios = <&pro_micro 8  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  /* B4 */
-        b-gpios = <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  /* B5 */
+        /* B4 → P1.06 (nice!nano v2), B5 → P1.04 */
+        a-gpios = <&gpio1  6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  /* B4 */
+        b-gpios = <&gpio1  4 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  /* B5 */
         steps = <80>;
         status = "disabled";
     };
