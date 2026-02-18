@@ -1,0 +1,19 @@
+#include "hskbd45.dtsi"
+
+/* 右半分はペリフェラル */
+
+&default_transform {
+    col-offset = <7>;
+};
+
+/* シリアル通信（TRRS D0ピン） */
+&uart0 {
+    status = "okay";
+    current-speed = <1000000>;
+    tx-pin = <3>;   /* D0 */
+    rx-pin = <2>;
+};
+
+&encoder_left {
+    status = "okay";
+};

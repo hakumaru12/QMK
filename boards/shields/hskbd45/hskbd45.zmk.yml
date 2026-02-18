@@ -1,0 +1,13 @@
+file_format: "1"
+id: hskbd45
+name: HSKBD45
+type: shield
+url: ""
+requires:
+  - pro_micro
+features:
+  - keys
+  - encoder
+siblings:
+  - hskbd45_left
+  - hskbd45_right

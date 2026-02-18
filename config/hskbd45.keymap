@@ -1,0 +1,88 @@
+/*
+ * HSKBD45 ZMK Keymap
+ *
+ * Layout (per half, 3x6 + bottom row):
+ *
+ * LEFT:
+ * ┌────┬────┬────┬────┬────┬────┐
+ * │    │    │    │    │    │    │
+ * ├────┼────┼────┼────┼────┼────┤
+ * │    │    │    │    │    │    │
+ * ├────┼────┼────┼────┼────┼────┤
+ * │    │    │    │    │    │    │
+ * ├────┼────┼────┼────┼────┼────┤
+ * │    │    │[EN]│    │    │    │  ← [EN] = エンコーダー（キーなし）
+ * └────┴────┴────┴────┴────┴────┘
+ *
+ * 合計キー数：左23 + 右22 = 45キー（エンコーダー2個含まず）
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+#define QWERTY 0
+#define LWR    1
+#define RSE    2
+#define ADJ    3
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        /* ─── Layer 0: QWERTY ─── */
+        qwerty_layer {
+            label = "QWERTY";
+            bindings = <
+/*  ┌──────┬──────┬──────┬──────┬──────┬──────┐                    ┌──────┬──────┬──────┬──────┬──────┬──────┐ */
+    &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T                      &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSPC
+/*  ├──────┼──────┼──────┼──────┼──────┼──────┤                    ├──────┼──────┼──────┼──────┼──────┼──────┤ */
+    &kp LCTRL &kp A &kp S  &kp D  &kp F  &kp G                      &kp H  &kp J  &kp K  &kp L &kp SEMI &kp SQT
+/*  ├──────┼──────┼──────┼──────┼──────┼──────┤                    ├──────┼──────┼──────┼──────┼──────┼──────┤ */
+    &kp LSHFT &kp Z &kp X  &kp C  &kp V  &kp B                      &kp N  &kp M &kp COMMA &kp DOT &kp SLASH &kp RSHFT
+/*  ├──────┼──────┼──────┼──────┼──────┼──────┤                    ├──────┼──────┼──────┼──────┼──────┤ */
+    &kp LGUI &kp LALT      &mo LWR &kp SPC &kp ESC  &kp RET &mo RSE       &kp RALT &kp RGUI
+/*  └──────┴──────┘      └──────┴──────┴──────┘  └──────┴──────┘       └──────┴──────┘ */
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        /* ─── Layer 1: Lower ─── */
+        lower_layer {
+            label = "LWR";
+            bindings = <
+    &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5                   &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp DEL
+    &trans  &kp MINUS &kp EQUAL &kp LBKT &kp RBKT &kp BSLH          &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
+    &trans  &trans  &trans  &trans  &trans  &trans                   &trans  &trans  &trans  &trans  &trans  &trans
+    &trans  &trans          &trans  &trans  &trans   &trans  &mo ADJ          &trans  &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN &inc_dec_kp C_NEXT C_PREV>;
+        };
+
+        /* ─── Layer 2: Raise ─── */
+        raise_layer {
+            label = "RSE";
+            bindings = <
+    &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6                  &kp F7  &kp F8  &kp F9  &kp F10 &kp F11 &kp F12
+    &trans  &trans  &trans  &trans  &trans  &trans                   &kp HOME &kp PG_DN &kp PG_UP &kp END &trans &trans
+    &trans  &trans  &trans  &trans  &trans  &trans                   &trans  &trans  &trans  &trans  &trans  &trans
+    &trans  &trans          &mo ADJ &trans  &trans   &trans  &trans           &trans  &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        /* ─── Layer 3: Adjust (BT など) ─── */
+        adjust_layer {
+            label = "ADJ";
+            bindings = <
+    &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &trans &trans   &trans &trans &trans &trans &trans &trans
+    &trans  &trans  &trans  &trans  &trans  &trans                   &trans  &trans  &trans  &trans  &trans  &trans
+    &trans  &trans  &trans  &trans  &trans  &trans                   &trans  &trans  &trans  &trans  &trans  &trans
+    &trans  &trans          &trans  &trans  &trans   &trans  &trans           &trans  &trans
+            >;
+        };
+    };
+};

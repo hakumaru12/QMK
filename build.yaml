@@ -1,0 +1,6 @@
+---
+include:
+  - board: pro_micro
+    shield: hskbd45_left
+  - board: pro_micro
+    shield: hskbd45_right
